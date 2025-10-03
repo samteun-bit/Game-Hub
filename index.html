@@ -182,46 +182,45 @@
   </div>
 
   <script>
-    function loadGame(url) {
-      const container = document.getElementById('gameContainer');
-      const frame = document.getElementById('game-frame');
-      frame.src = url;
-      container.classList.add('active');
-    }
-
-    function closeGame() {
-      const container = document.getElementById('gameContainer');
-      const frame = document.getElementById('game-frame');
-      container.classList.remove('active');
-      frame.src = ''; 
-      if (document.fullscreenElement) {    ← 이 부분 추가!
-    document.exitFullscreen();         ← 전체화면이면 해제
-      }
-    }
-
-    function toggleFullscreen() {
-      const container = document.getElementById('gameContainer');
-      
-      if (!document.fullscreenElement) {
-    // 전체화면이 아니면 → 전체화면으로
-        container.requestFullscreen().catch(err => {
-          alert('전체화면 모드를 실행할 수 없습니다: ' + err.message);
-    });
-  } else {
-    // 전체화면이면 → 해제
-    document.exitFullscreen();
+<script>
+  function loadGame(url) {
+    const container = document.getElementById('gameContainer');
+    const frame = document.getElementById('game-frame');
+    frame.src = url;
+    container.classList.add('active');
   }
-}
 
-    // 완전히 새로 추가된 이벤트 리스너
-    document.addEventListener('fullscreenchange', () => {
-      const button = document.querySelector('.fullscreen-button');
-      if (document.fullscreenElement) {
-        button.textContent = '⛶ 전체화면 해제';  // 전체화면일 때
-      } else {
-        utton.textContent = '⛶ 전체화면';       // 일반 화면일 때
-      }
-});
+  function closeGame() {
+    const container = document.getElementById('gameContainer');
+    const frame = document.getElementById('game-frame');
+    container.classList.remove('active');
+    frame.src = '';
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    }
+  }
+
+  function toggleFullscreen() {
+    const container = document.getElementById('gameContainer');
+    
+    if (!document.fullscreenElement) {
+      container.requestFullscreen().catch(err => {
+        alert('전체화면 모드를 실행할 수 없습니다: ' + err.message);
+      });
+    } else {
+      document.exitFullscreen();
+    }
+  }
+
+  document.addEventListener('fullscreenchange', () => {
+    const button = document.querySelector('.fullscreen-button');
+    if (document.fullscreenElement) {
+      button.textContent = '⛶ 전체화면 해제';
+    } else {
+      button.textContent = '⛶ 전체화면';
+    }
+  });
+</script>
   </script>
 </body>
 </html>
